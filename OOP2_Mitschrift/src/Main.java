@@ -24,10 +24,10 @@ public class Main extends Application{
 	public void init(){
 		
 		
-		Platform.setImplicitExit(false);
+		Platform.setImplicitExit(true);
 		
 		System.out.println("2. Do initialisation here.");
-		button = new Button("Close");
+		button = new Button("Create");
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
