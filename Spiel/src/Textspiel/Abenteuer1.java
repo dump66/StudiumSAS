@@ -189,7 +189,7 @@ public class Abenteuer1 {
 
 			// Verwaltung zufälliger Tagesablauf
 			int zufallszahl = (int) (Math.random() * 6) + 1;
-			switch (3) { // ACHTUNG
+			switch (zufallszahl) { // ACHTUNG
 			case 1:
 				// Wasser finden + später Heilkräuter
 				System.out.println("Du findest eine Quelle und kannst dein Wasservorrat auffüllen.");
