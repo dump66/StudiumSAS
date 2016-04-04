@@ -8,13 +8,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+// Test
 public class Aufgabe1 extends Application {
 	private int counter = 0;
 
 	@Override
 	public void start(final Stage primaryStage) {
 		Button btn = new Button();
-		btn.setText("Lösung");
+		btn.setText("LÃ¶sung");
 		Label lbl = new Label();
 		lbl.setText("Klick #");
 		final Text txt = new Text();
