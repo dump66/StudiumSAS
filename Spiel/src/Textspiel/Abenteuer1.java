@@ -1,5 +1,5 @@
 package Textspiel;
-
+// Testen wir das Pullen. Brost!
 import java.util.Scanner;
 
 public class Abenteuer1 {
