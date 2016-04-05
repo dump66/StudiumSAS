@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-// Test2
+// remote
 public class Aufgabe1 extends Application {
 	private int counter = 0;
 
