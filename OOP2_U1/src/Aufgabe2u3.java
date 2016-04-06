@@ -12,7 +12,7 @@ public class Aufgabe2u3 extends Application {
 
 	@Override
 	public void start(final Stage primaryStage) {
-		final Text tf = new Text();
+		final Text tf = new Text("Center");
 		final Button btnTop = new Button();
 		btnTop.setText("Top");
 		btnTop.setOnAction(new EventHandler<ActionEvent>() {
@@ -57,6 +57,9 @@ public class Aufgabe2u3 extends Application {
 		root.setLeft(btnLeft);
 		root.setCenter(tf);
 		root.setAlignment(root.getTop(), Pos.CENTER);
+		root.setAlignment(root.getLeft(), Pos.CENTER);
+		root.setAlignment(root.getRight(), Pos.CENTER);
+		root.setAlignment(root.getBottom(), Pos.CENTER);
 
 		Scene scene = new Scene(root, 300, 250);
 		primaryStage.setTitle("Aufgabe 3");
