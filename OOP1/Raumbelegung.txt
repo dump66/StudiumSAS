@@ -1,0 +1,3 @@
+A,105,Seminar,30
+b,203,lakj,93
+c,302,ooooo,70
