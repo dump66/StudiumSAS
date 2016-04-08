@@ -1,4 +1,10 @@
 package Textspiel;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 // Meine Zeile
 import java.util.Scanner;
 
@@ -19,24 +25,31 @@ public class Abenteuer1 {
 	Scanner lese = new Scanner(System.in);
 
 	// Missionstext für das Abenteuer
-	public void intro() {
+	public void intro() throws IOException {
 		
-		String[] anfang = new String[15];
-		anfang[0] = "Du bist in einem kleinen Dorf als Sohn eines Bauern aufgewachsen ... (weiter geht es mit Enter)";
-		anfang[1] = "Dein Vater hat dich gebeten einen Brief an deinem Onkel in Jena zu überbringen.";
-		anfang[2] = "Was im Brief steht und warum das nicht ein Boote machen kann, wollte dir der alte Herr nicht beantworten.";
-		anfang[3] = "Aber eigentlich ist es dir auch egal warum du die lange Reise auf dich nehmen sollst ...";
-		anfang[4] = "schließlich bedeutet das für eine Weile, keine Schweine ausmisten, keine Kuehe melken oder das Feld bestellen.";
-		anfang[5] = "Darüber hinaus konntest du deinen alten Herren eh nicht leiden... ";
-		anfang[6] = "da seine harsche und kühle Sklaventreibermentalität nicht wirklich zur Gesamtzufriedenheit beitrug.";
-		anfang[7] = "Also stehst du am nächsten morgen früh auf und beginnst deine 40 tägige Reise nach Jena.";
-		anfang[8] = "Als du die Türschwelle betritts ruft dir deine Mutter hinterher ... ";
-		anfang[9] = "Willst du klamm heimlich verschwinden ohne deine Mutter zu verabschieden?";
-		anfang[10] = "HIER EIN BISSEL WAS INTERAKTIVES + StringLine blockiert!!!!!!!!!!!!!!!!!!!";
-		anfang[11] = "Ende: Mutter zeigt auf Rucksack ... Verpflegung für eine Woche, Karte und 15 Taler.";
-		anfang[12] = "Du drueckst zum Abschied nochmal deine Mutter und sagst das du ja in 2 Monaten wieder da bist";
-		anfang[13] = "Dann verlässt du das Haus und begibst dich Richtung Osten nach Jena.";
-		anfang[14] = "Was möchtest du als nächstes tun?";
+		FileReader fr = new FileReader(new File(".\\Intro"));
+		int c = 0;
+		String s = "";
+		while ((c=fr.read())!=-1){
+			s = s + (String.valueOf((char) c));
+		}
+		String[] anfang = s.split("\\r\\n");
+		//String[] anfang = new String[15];
+//		anfang[0] = "Du bist in einem kleinen Dorf als Sohn eines Bauern aufgewachsen ... (weiter geht es mit Enter)";
+//		anfang[1] = "Dein Vater hat dich gebeten einen Brief an deinem Onkel in Jena zu überbringen.";
+//		anfang[2] = "Was im Brief steht und warum das nicht ein Boote machen kann, wollte dir der alte Herr nicht beantworten.";
+//		anfang[3] = "Aber eigentlich ist es dir auch egal warum du die lange Reise auf dich nehmen sollst ...";
+//		anfang[4] = "schließlich bedeutet das für eine Weile, keine Schweine ausmisten, keine Kuehe melken oder das Feld bestellen.";
+//		anfang[5] = "Darüber hinaus konntest du deinen alten Herren eh nicht leiden... ";
+//		anfang[6] = "da seine harsche und kühle Sklaventreibermentalität nicht wirklich zur Gesamtzufriedenheit beitrug.";
+//		anfang[7] = "Also stehst du am nächsten morgen früh auf und beginnst deine 40 tägige Reise nach Jena.";
+//		anfang[8] = "Als du die Türschwelle betritts ruft dir deine Mutter hinterher ... ";
+//		anfang[9] = "Willst du klamm heimlich verschwinden ohne deine Mutter zu verabschieden?";
+//		anfang[10] = "HIER EIN BISSEL WAS INTERAKTIVES + StringLine blockiert!!!!!!!!!!!!!!!!!!!";
+//		anfang[11] = "Ende: Mutter zeigt auf Rucksack ... Verpflegung für eine Woche, Karte und 15 Taler.";
+//		anfang[12] = "Du drueckst zum Abschied nochmal deine Mutter und sagst das du ja in 2 Monaten wieder da bist";
+//		anfang[13] = "Dann verlässt du das Haus und begibst dich Richtung Osten nach Jena.";
+//		anfang[14] = "Was möchtest du als nächstes tun?";
 		
 		for (int i = 0;i<anfang.length;i++)
 		{

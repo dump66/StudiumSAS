@@ -1,11 +1,13 @@
 package Textspiel;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Spieltest {
 	static Held held1;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		System.out.println("==================================================================");
 		System.out.println("| Spielstand Speichern (S) \t" + "| Neues Spiel (N)" + "\t \t |");
