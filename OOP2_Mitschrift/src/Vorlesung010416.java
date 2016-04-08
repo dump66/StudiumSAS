@@ -11,13 +11,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 // Vom 01.04.16
-public class Main extends Application{
+public class Vorlesung010416 extends Application{
 	
 	Button button, button2;
 	Stage stage;
 	
 	
-	public Main(){
+	public Vorlesung010416(){
 		System.out.println("1. Code der beim Erstellen des Objekts ausgeführt wird");
 	}
 	
@@ -27,7 +27,7 @@ public class Main extends Application{
 		Platform.setImplicitExit(false);
 		
 		System.out.println("2. Do initialisation here.");
-		button = new Button("Close");
+		button = new Button("open");
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -73,6 +73,6 @@ public class Main extends Application{
 	}
 	
 	public static void main(String[] args){
-		Main.launch(args);
+		Vorlesung010416.launch(args);
 	}
 }
