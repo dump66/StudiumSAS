@@ -10,7 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-public class Vorlesung080416 extends Application {
+public class Vorlesung080416_1 extends Application {
 
 	public void start(final Stage primaryStage) {
 		try {
