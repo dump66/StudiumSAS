@@ -60,6 +60,7 @@ public class Aufgabe6 extends Application{
 		Scene cnfScene = new Scene(cnfPane, 200, 200);
 		Scene scene = new Scene(root, 400, 400);
 		confirmStage.setScene(cnfScene);
+		confirmStage.initOwner(primaryStage);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

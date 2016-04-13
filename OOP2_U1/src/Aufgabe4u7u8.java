@@ -53,7 +53,7 @@ public class Aufgabe4u7u8 extends Application {
 		Button btnOK = new Button();
 		btnOK.setText("OK");
 		Button btnCancel = new Button();
-		btnCancel.setText("Abbrechen");
+		btnCancel.setText("Löschen");
 		double d = 3.64328;
 		d *= 100;
 		d = Math.round(d);
@@ -93,6 +93,11 @@ public class Aufgabe4u7u8 extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
+				writeData();
+
+			}
+
+			private void writeData() {
 				fc.setTitle("Speichere in eine Datei");
 				f = fc.showSaveDialog(primaryStage);
 				if (f != null) {
@@ -136,7 +141,6 @@ public class Aufgabe4u7u8 extends Application {
 				} else {
 					System.out.println("Vorgang abgebrochen!");
 				}
-
 			}
 		});
 
@@ -178,7 +182,7 @@ public class Aufgabe4u7u8 extends Application {
 
 		Scene scene = new Scene(root);
 		// primaryStage.sizeToScene();
-		primaryStage.setTitle("Aufgabe 4");
+		primaryStage.setTitle("Aufgabe 8");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		// fName.setFocusTraversable(false);
