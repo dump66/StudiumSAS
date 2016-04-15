@@ -17,7 +17,9 @@ public class Vorlesung150416_2 extends Application{
 		
 		Circle circ = new Circle(30, 45, 10);
 		
-		circ.setOnMouseEntered(new MyEventHandler150416("MouseEntered"));
+		MyEventHandler150416 dragHandler = new MyEventHandler150416("MouseDrag&Drop");
+		circ.setOnMousePressed(dragHandler);
+		circ.setOnMouseDragged(dragHandler);
 		
 		root.getChildren().add(circ);
 		Scene scene = new Scene(root, 400, 400);
