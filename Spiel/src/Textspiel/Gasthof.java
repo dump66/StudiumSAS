@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Gasthof extends Abenteuer1 {
 
-	private int maxproviant = 3;
-	private int maxWasser = 5;
-	private int maxtragWasser = 7;
+	private int maxproviant = ((int) (Math.random() * 3) + 1);
+	private int maxWasser = ((int) (Math.random() * 4) + 2);;
+	private int maxtragWasser = 7; //getMaxWasser von Held verwenden du Held ==> weiter unten
 
 	Scanner lese = new Scanner(System.in);
 
@@ -44,7 +44,6 @@ public class Gasthof extends Abenteuer1 {
 				} else {
 					System.out.println("Deinem Rucksack wurden " + proviant + " Proviant hinzugefügt.");
 					System.out.println("Deinem Rucksack wurden " + proviant + " Taler entnommen.");
-					this.maxproviant = ((int) (Math.random() * 3) + 1);
 					besuchGasthof(held);
 				}
 			} else {
@@ -75,7 +74,6 @@ public class Gasthof extends Abenteuer1 {
 				} else {
 					System.out.println("Deinem Rucksack wurden " + wasser + " Wasser hinzugefügt.");
 					System.out.println("Deinem Rucksack wurden " + wasser + " Taler entnommen.");
-					this.maxWasser = ((int) (Math.random() * 4) + 2);
 					besuchGasthof(held);
 				}
 			} else {

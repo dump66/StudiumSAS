@@ -1,14 +1,19 @@
 package Textspiel;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 // Meine Zeile
 import java.util.Scanner;
 
-public class Abenteuer1 {
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Abenteuer1 extends Application{
 
 	private int laengeKarte = 10; // Länge Karte
 	private int breiteKarte = 60; // Breite Karte
@@ -73,6 +78,17 @@ public class Abenteuer1 {
 		karte[3][45] = "J";
 
 		this.karte = karte;
+		
+	}
+	
+	// Methoden um Held auf Karte zu positionieren
+	public void setZeile(int zeile)
+	{
+		this.zeile = zeile;
+	}
+	public void setSpalte(int spalte)
+	{
+		this.spalte = spalte;
 	}
 
 	// Karte während des Abenteuers ausdrucken lassen
@@ -252,7 +268,7 @@ public class Abenteuer1 {
 	// passiert Nichts reaktion
 	public void passiertNichts(Held held) {
 		System.out.println("");
-		System.out.println("reisen(r) Karte anschauen(k) Held anschauen(h) Spielratgeber(s)");
+		System.out.println("reisen(r) Karte anschauen(k) Held anschauen(h) Spielratgeber(s) speichern(p)");
 		System.out.print(">");
 
 		String auswahl = lese.next();
@@ -266,6 +282,28 @@ public class Abenteuer1 {
 			break;
 		case "r":
 			bewegen();
+			break;
+		case "p":
+			try {
+				BufferedWriter bf = new BufferedWriter(new FileWriter("C:\\Users\\Stephan.Pautz\\Downloads\\test.txt"));
+				bf.write(held.getnameH() + System.lineSeparator() +
+				held.getGesundheit() + System.lineSeparator() +
+				this.zeile + System.lineSeparator() +
+				this.spalte + System.lineSeparator());
+				bf.flush();
+				bf.close();
+				System.out.println(" ... Das Spiel wurde erfolgreich hier gespeichert:");
+				try { // Wartet eine Sekunde bevor es im Programm weitergeht
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.println("C:\\Users\\Stephan.Pautz\\Downloads\\test.txt");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			passiertNichts(held);
 			break;
 		case "h":
 			held.anzeigeHeld();
@@ -281,5 +319,11 @@ public class Abenteuer1 {
 			break;
 		}
 
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }
