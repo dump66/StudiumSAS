@@ -289,7 +289,16 @@ public class Abenteuer1 extends Application{
 				bf.write(held.getnameH() + System.lineSeparator() +
 				held.getGesundheit() + System.lineSeparator() +
 				this.zeile + System.lineSeparator() +
-				this.spalte + System.lineSeparator());
+				this.spalte + System.lineSeparator() +
+				
+				held.getproviant() + System.lineSeparator() +
+				held.getwasser() + System.lineSeparator() +
+				held.getstaerkeH() + System.lineSeparator() +
+				held.getwiderstandH() + System.lineSeparator() +
+				held.getgeschickH() + System.lineSeparator() +
+				held.getErfahrung() + System.lineSeparator() +
+				held.getGeld() + System.lineSeparator() +
+				held.getfell() + System.lineSeparator());
 				bf.flush();
 				bf.close();
 				System.out.println(" ... Das Spiel wurde erfolgreich hier gespeichert:");
