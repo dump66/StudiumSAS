@@ -265,7 +265,7 @@ public class Abenteuer1 {
 	// passiert Nichts reaktion
 	public void passiertNichts(Held held) {
 		System.out.println("");
-		System.out.println("reisen(r) Karte anschauen(k) Held anschauen(h) Spielratgeber(s) speichern(p)");
+		System.out.println("reisen(r) Karte anschauen(k) Held anschauen(h) Spielratgeber(s) speichern(p) Heilkräuter nehmen(n)");
 		System.out.print(">");
 
 		String auswahl = lese.next();
@@ -279,6 +279,24 @@ public class Abenteuer1 {
 			break;
 		case "r":
 			bewegen();
+			break;
+		case "n":
+			if (held.getheilkraut() > 0)
+			{
+				int heilung = (int) (Math.random() * 6) + 10;
+				held.setheilkraut((held.getheilkraut()-1));
+				held.setGesundheit(held.getGesundheit()+heilung);
+				System.out.println("Dein Held erhält " + heilung + " Gesundheit");
+				if (held.getGesundheit() >= 100)
+				{
+					System.out.println("Dein Held ist wieder bei voller Gesundheit.");
+				}
+			}
+			else
+			{
+				System.out.println("Du hast gar keine Heilkräuter.");
+			}
+			passiertNichts(held);
 			break;
 		case "p":
 			try {
@@ -295,7 +313,8 @@ public class Abenteuer1 {
 				held.getgeschickH() + System.lineSeparator() +
 				held.getErfahrung() + System.lineSeparator() +
 				held.getGeld() + System.lineSeparator() +
-				held.getfell() + System.lineSeparator());
+				held.getfell() + System.lineSeparator() +
+				held.getheilkraut() + System.lineSeparator());
 				bf.flush();
 				bf.close();
 				System.out.println(" ... Das Spiel wurde erfolgreich hier gespeichert:");

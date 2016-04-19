@@ -54,6 +54,7 @@ public class Spieltest extends Application {
 			held1.setErfahrung(Integer.parseInt(bf.readLine()));
 			held1.setGeld(Integer.parseInt(bf.readLine()));
 			held1.setfell(Integer.parseInt(bf.readLine()));
+			held1.setheilkraut(Integer.parseInt(bf.readLine()));
 			bf.close();
 		}
 		;
