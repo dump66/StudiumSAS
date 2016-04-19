@@ -185,10 +185,16 @@ public class Held {
 	// Kampfsystem Held
 	public void angriffHeld(Gegner tier) {
 		if (getGesundheit() <= 0) {
-			System.out.println("         	           ____");
-			System.out.println("                      |---.\\");
-			System.out.println("              ___     |");
-			System.out.println("             / .-\\ ./=)");
+			System.out.println("       ___");
+			System.out.println("      /  /\\   |---.");
+			System.out.println("      |__|/__ |---,\\");
+			System.out.println("      |  `   |= ");
+			System.out.println("      |      /|");
+			System.out.println("      |  .--' |");
+			System.out.println("      |   |   |");
+			System.out.println("      |   |   |");
+			System.out.println("     /    |   |");
+			System.out.println("    /_____\\ ");
 			System.out.println("Dein Held ist gestorben.");
 			System.exit(0);
 		}

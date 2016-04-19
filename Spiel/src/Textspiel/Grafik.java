@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 
 public class Grafik extends Application {
 	
-	Text inhaltZentrum = new Text("Hier soll der Text hin");
+	TextField inhaltZentrum = new TextField("Hier soll der Text hin");
 	Button weiter = new Button("weiter");
 	Button test2 = new Button("ok");
 	int klickcounter = 0;
