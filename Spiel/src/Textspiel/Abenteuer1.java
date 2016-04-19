@@ -1,24 +1,12 @@
 package Textspiel;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-// Meine Zeile
 import java.util.Scanner;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-public class Abenteuer1 extends Application{
+public class Abenteuer1 {
 	
 	private int laengeKarte = 10; // Länge Karte
 	private int breiteKarte = 60; // Breite Karte
@@ -222,8 +210,9 @@ public class Abenteuer1 extends Application{
 			}
 
 			// Verwaltung zufälliger Tagesablauf
+			// Achtung !!! Zufallszahl ist 6 anstatt zufallszahl
 			int zufallszahl = (int) (Math.random() * 6) + 1;
-			switch (zufallszahl) { // ACHTUNG
+			switch (6) { // ACHTUNG!!!
 			case 1:
 				// Wasser finden + später Heilkräuter
 				System.out.println("Du findest eine Quelle und kannst dein Wasservorrat auffüllen.");
@@ -261,6 +250,9 @@ public class Abenteuer1 extends Application{
 				break;
 			case 6:
 				// Händler treffen + reden + karten + heilung
+				System.out.println("Ein fliegender Haendler besucht dich."); // Neues Objekt erstellen
+				Haendler haendler = new Haendler();
+				haendler.besuchHaendler(held);
 				passiertNichts(held);
 				break;
 			default:
@@ -333,12 +325,6 @@ public class Abenteuer1 extends Application{
 			break;
 		}
 
-	}
-	
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		
 	}
 
 }
