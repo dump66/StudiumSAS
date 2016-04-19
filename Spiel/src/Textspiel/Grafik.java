@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -16,14 +17,15 @@ import javafx.stage.Stage;
 
 public class Grafik extends Application {
 	
-	TextField inhaltZentrum = new TextField("Hier soll der Text hin");
+	TextArea inhaltZentrum = new TextArea();
 	Button weiter = new Button("weiter");
 	Button test2 = new Button("ok");
 	int klickcounter = 0;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
+		inhaltZentrum.setEditable(false);
+		inhaltZentrum.setPromptText("Hier soll der Text hin");
 		HBox hboxoben = new HBox();
 		hboxoben.getChildren().add(weiter);
 		hboxoben.getChildren().add(test2);
@@ -51,9 +53,11 @@ public class Grafik extends Application {
 			anfang[13] = "Dann verlässt du das Haus und begibst dich Richtung Osten nach Jena.";
 			anfang[14] = "Was möchtest du als nächstes tun?";
 			
-			inhaltZentrum.setText(anfang[klickcounter]);
-
+			inhaltZentrum.setText(inhaltZentrum.getText() + System.lineSeparator() + anfang[klickcounter]);
+			
 			klickcounter++;
+			inhaltZentrum.selectEnd();
+			inhaltZentrum.deselect();
 			}
 		};
 		
