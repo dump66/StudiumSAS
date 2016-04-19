@@ -25,7 +25,8 @@ public class Grafik extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		inhaltZentrum.setEditable(false);
-		inhaltZentrum.setPromptText("Hier soll der Text hin");
+		inhaltZentrum.setMaxSize(200, 200);
+		inhaltZentrum.setWrapText(true);
 		HBox hboxoben = new HBox();
 		hboxoben.getChildren().add(weiter);
 		hboxoben.getChildren().add(test2);
