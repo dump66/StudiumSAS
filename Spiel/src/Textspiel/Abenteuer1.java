@@ -11,10 +11,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Abenteuer1 extends Application{
-
+	
 	private int laengeKarte = 10; // Länge Karte
 	private int breiteKarte = 60; // Breite Karte
 	private String[][] karte; // Felder der Karte
@@ -329,10 +334,11 @@ public class Abenteuer1 extends Application{
 		}
 
 	}
+	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
+
 }

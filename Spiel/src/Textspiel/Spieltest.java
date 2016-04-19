@@ -33,18 +33,19 @@ public class Spieltest extends Application {
 		System.out.println(yain);
 
 		if (yain.equals("j")) {
-			FileChooser fc = new FileChooser();
+			
+			// Auskommentierte Funktion beinhaltet Speicherung nach eigenr Wahl: Zeile 38 - 43
+			/*FileChooser fc = new FileChooser();
 			fc.setInitialDirectory (new File("C:\\Users\\Stephan.Pautz\\Downloads\\"));
 			fc.setTitle("Held LadeFenster");
 			fc.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
-					new ExtensionFilter("All Files", "*.*"));
-			File alterHeld = fc.showOpenDialog(primaryStage);
+					new ExtensionFilter("All Files", "*.*"));*/
+			File alterHeld = new File("C:\\Users\\Stephan.Pautz\\Downloads\\test.txt");//fc.showOpenDialog(primaryStage);
 			BufferedReader bf = new BufferedReader(new FileReader(alterHeld));
 			held1.setnameH(bf.readLine());
 			held1.setGesundheit(Integer.parseInt(bf.readLine()));
 			abenteuer.setZeile(Integer.parseInt(bf.readLine()));
 			abenteuer.setSpalte(Integer.parseInt(bf.readLine()));
-			
 			held1.setproviant(Integer.parseInt(bf.readLine()));
 			held1.setwasser(Integer.parseInt(bf.readLine()));
 			held1.setstaerkeH(Integer.parseInt(bf.readLine()));
@@ -56,10 +57,11 @@ public class Spieltest extends Application {
 			bf.close();
 		}
 		;
-
+		
+		// Helden selber erstellen
 		// held1.generieren();
 		// held1.anzeigeHeld();
-
+		
 		// Abenteuer initialisieren
 		abenteuer.intro();
 		abenteuer.erstelleKarte();
