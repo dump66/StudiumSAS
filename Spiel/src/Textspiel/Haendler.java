@@ -107,7 +107,7 @@ public class Haendler extends Abenteuer1 {
 		case "r":
 			//weiterreisen
 			System.out.println("Du reist weiter und übernachtest im Freien.");
-			besuchHaendler(held);
+			passiertNichts(held);
 			break;
 		case "f":
 			//fell verkaufen
