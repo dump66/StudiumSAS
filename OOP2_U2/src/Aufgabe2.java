@@ -1,12 +1,9 @@
-import com.sun.javafx.geom.Shape;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -19,20 +16,28 @@ public class Aufgabe2 extends Application {
 	public static final Color rtColor = Color.RED;
 	public static final Color circColor = Color.BLUE;
 	public static final Color elColor = Color.BLACK;
+	
+	Scene scene;
+	
 	Rectangle rt;
 	Circle circle;
 	Ellipse el;
+	
+	double objX;
+	double objY;
+	double mouseX;
+	double mouseY;
 
 	public void start(Stage primStage) {
-		rt = new Rectangle(50, 40);
-		circle = new Circle(50);
-		el = new Ellipse(50, 25);
+		rt = new Rectangle(0, 0, 50, 40);
+		circle = new Circle(100, 100, 50);
+		el = new Ellipse(200, 200, 50, 25);
 
 		rt.setFill(Color.RED);
 		circle.setFill(Color.BLUE);
 		el.setFill(Color.BLACK);
 
-		EventHandler<MouseEvent> eh = new EventHandler<MouseEvent>() {
+		EventHandler<MouseEvent> onClickHandler = new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				if (event.getButton() == MouseButton.SECONDARY) {
 					if (event.getSource() instanceof Rectangle) {
@@ -54,13 +59,42 @@ public class Aufgabe2 extends Application {
 			}
 		};
 
-		rt.setOnMouseClicked(eh);
-		circle.setOnMouseClicked(eh);
-		el.setOnMouseClicked(eh);
+		EventHandler<MouseEvent> myDragHandler = new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				if (event.getButton() == MouseButton.PRIMARY) {
+					Node tgt = (Node) event.getTarget();
+					if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+						objX = tgt.getTranslateX();
+						objY = tgt.getTranslateY();
+						mouseX = event.getSceneX();
+						mouseY = event.getSceneY();
+					} else if (event.getEventType() == MouseEvent.MOUSE_DRAGGED){
+						double x = event.getSceneX()-(mouseX-objX);
+						double y = event.getSceneY()-(mouseY-objY);
+						x = x>scene.getWidth()?scene.getWidth():x;
+						x = x<0?0:x;
+						y = y>scene.getHeight()?scene.getHeight():y;
+						y = y<0?0:y;
+						tgt.setTranslateX(x);
+						tgt.setTranslateY(y);
+					}
+				}
+			}
+		};
 
-		HBox pane = new HBox();
+		rt.setOnMouseClicked(onClickHandler);
+		circle.setOnMouseClicked(onClickHandler);
+		el.setOnMouseClicked(onClickHandler);
+		rt.setOnMousePressed(myDragHandler);
+		circle.setOnMousePressed(myDragHandler);
+		el.setOnMousePressed(myDragHandler);
+		rt.setOnMouseDragged(myDragHandler);
+		circle.setOnMouseDragged(myDragHandler);
+		el.setOnMouseDragged(myDragHandler);
+
+		Pane pane = new Pane();
 		pane.getChildren().addAll(rt, circle, el);
-		Scene scene = new Scene(pane, 500, 400);
+		scene = new Scene(pane, 500, 400);
 
 		scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
@@ -75,7 +109,7 @@ public class Aufgabe2 extends Application {
 
 	private Color getRandomColor() {
 		Color[] paintList = new Color[5];
-		paintList[0] = Color.AZURE;
+		paintList[0] = Color.AQUA;
 		paintList[1] = Color.BLUEVIOLET;
 		paintList[2] = Color.DEEPPINK;
 		paintList[3] = Color.DIMGREY;
