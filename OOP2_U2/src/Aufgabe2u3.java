@@ -111,7 +111,6 @@ public class Aufgabe2u3 extends Application {
 
 						tgt.setTranslateX(x);
 						tgt.setTranslateY(y);
-						System.out.println(tgt.getTranslateX() + " - " + tgt.getTranslateY());
 					}
 				}
 			}
@@ -133,13 +132,6 @@ public class Aufgabe2u3 extends Application {
 		Pane pane = new Pane();
 		pane.getChildren().addAll(rt, circle, el);
 		scene = new Scene(pane, 500, 400);
-
-		scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				if (event.isMiddleButtonDown()) {
-				}
-			}
-		});
 
 		primStage.setScene(scene);
 		primStage.show();
