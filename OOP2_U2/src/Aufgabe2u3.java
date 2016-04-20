@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -16,13 +17,13 @@ public class Aufgabe2u3 extends Application {
 	public static final Color rtColor = Color.RED;
 	public static final Color circColor = Color.BLUE;
 	public static final Color elColor = Color.BLACK;
-	
+
 	Scene scene;
-	
+
 	Rectangle rt;
 	Circle circle;
 	Ellipse el;
-	
+
 	double objX;
 	double objY;
 	double mouseX;
@@ -39,15 +40,7 @@ public class Aufgabe2u3 extends Application {
 
 		EventHandler<MouseEvent> onClickHandler = new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				if (event.getButton() == MouseButton.SECONDARY) {
-					if (event.getSource() instanceof Rectangle) {
-						rt.setFill(getRandomColor());
-					} else if (event.getSource() instanceof Circle) {
-						circle.setFill(getRandomColor());
-					} else if (event.getSource() instanceof Ellipse) {
-						el.setFill(getRandomColor());
-					}
-				} else if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+				if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
 					if (event.getSource() instanceof Rectangle) {
 						rt.setFill(Color.RED);
 					} else if (event.getSource() instanceof Circle) {
@@ -55,6 +48,18 @@ public class Aufgabe2u3 extends Application {
 					} else if (event.getSource() instanceof Ellipse) {
 						el.setFill(Color.BLACK);
 					}
+				}
+			}
+		};
+
+		EventHandler<ScrollEvent> myScrollHandler = new EventHandler<ScrollEvent>() {
+			public void handle(ScrollEvent event) {
+				if (event.getSource() instanceof Rectangle) {
+					rt.setFill(getRandomColor());
+				} else if (event.getSource() instanceof Circle) {
+					circle.setFill(getRandomColor());
+				} else if (event.getSource() instanceof Ellipse) {
+					el.setFill(getRandomColor());
 				}
 			}
 		};
@@ -68,42 +73,42 @@ public class Aufgabe2u3 extends Application {
 						objY = tgt.getTranslateY();
 						mouseX = event.getSceneX();
 						mouseY = event.getSceneY();
-					} else if (event.getEventType() == MouseEvent.MOUSE_DRAGGED){
+					} else if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
 						double maxNegX = 0;
 						double maxNegY = 0;
 						double maxX = 0;
 						double maxY = 0;
-						
+
 						if (tgt instanceof Rectangle) {
 							Rectangle r = (Rectangle) tgt;
 							maxNegX = -r.getX();
 							maxNegY = -r.getY();
-							maxX = scene.getWidth()-maxNegX-r.getWidth();
-							maxY = scene.getHeight()-maxNegY-r.getHeight();
+							maxX = scene.getWidth() - maxNegX - r.getWidth();
+							maxY = scene.getHeight() - maxNegY - r.getHeight();
 						} else if (tgt instanceof Circle) {
 							Circle c = (Circle) tgt;
-							maxNegX = -c.getCenterX()+c.getRadius();
-							maxNegY = -c.getCenterY()+c.getRadius();
-							maxX = scene.getWidth()-c.getCenterX()-c.getRadius();
-							maxY = scene.getHeight()-c.getCenterY()-c.getRadius();
+							maxNegX = -c.getCenterX() + c.getRadius();
+							maxNegY = -c.getCenterY() + c.getRadius();
+							maxX = scene.getWidth() - c.getCenterX() - c.getRadius();
+							maxY = scene.getHeight() - c.getCenterY() - c.getRadius();
 						} else if (tgt instanceof Ellipse) {
 							Ellipse e = (Ellipse) tgt;
-							maxNegX = -e.getCenterX()+e.getRadiusX();
-							maxNegY = -e.getCenterY()+e.getRadiusY();
-							maxX = scene.getWidth()-e.getCenterX()-e.getRadiusX();
-							maxY = scene.getHeight()-e.getCenterY()-e.getRadiusY();
+							maxNegX = -e.getCenterX() + e.getRadiusX();
+							maxNegY = -e.getCenterY() + e.getRadiusY();
+							maxX = scene.getWidth() - e.getCenterX() - e.getRadiusX();
+							maxY = scene.getHeight() - e.getCenterY() - e.getRadiusY();
 						}
-						
-						double mausAbstandX = mouseX-objX;
-						double mausAbstandY = mouseY-objY;
-						double x = event.getSceneX()-mausAbstandX;
-						double y = event.getSceneY()-mausAbstandY;
-						
+
+						double mausAbstandX = mouseX - objX;
+						double mausAbstandY = mouseY - objY;
+						double x = event.getSceneX() - mausAbstandX;
+						double y = event.getSceneY() - mausAbstandY;
+
 						x = x < maxNegX ? maxNegX : x;
 						y = y < maxNegY ? maxNegY : y;
 						x = x > maxX ? maxX : x;
 						y = y > maxY ? maxY : y;
-						
+
 						tgt.setTranslateX(x);
 						tgt.setTranslateY(y);
 						System.out.println(tgt.getTranslateX() + " - " + tgt.getTranslateY());
@@ -115,6 +120,9 @@ public class Aufgabe2u3 extends Application {
 		rt.setOnMouseClicked(onClickHandler);
 		circle.setOnMouseClicked(onClickHandler);
 		el.setOnMouseClicked(onClickHandler);
+		rt.setOnScroll(myScrollHandler);
+		circle.setOnScroll(myScrollHandler);
+		el.setOnScroll(myScrollHandler);
 		rt.setOnMousePressed(myDragHandler);
 		circle.setOnMousePressed(myDragHandler);
 		el.setOnMousePressed(myDragHandler);
