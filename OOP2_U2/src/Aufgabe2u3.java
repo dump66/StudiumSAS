@@ -11,7 +11,7 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class Aufgabe2 extends Application {
+public class Aufgabe2u3 extends Application {
 
 	public static final Color rtColor = Color.RED;
 	public static final Color circColor = Color.BLUE;
@@ -69,14 +69,44 @@ public class Aufgabe2 extends Application {
 						mouseX = event.getSceneX();
 						mouseY = event.getSceneY();
 					} else if (event.getEventType() == MouseEvent.MOUSE_DRAGGED){
-						double x = event.getSceneX()-(mouseX-objX);
-						double y = event.getSceneY()-(mouseY-objY);
-						x = x>scene.getWidth()?scene.getWidth():x;
-						x = x<0?0:x;
-						y = y>scene.getHeight()?scene.getHeight():y;
-						y = y<0?0:y;
+						double maxNegX = 0;
+						double maxNegY = 0;
+						double maxX = 0;
+						double maxY = 0;
+						
+						if (tgt instanceof Rectangle) {
+							Rectangle r = (Rectangle) tgt;
+							maxNegX = -r.getX();
+							maxNegY = -r.getY();
+							maxX = scene.getWidth()-maxNegX-r.getWidth();
+							maxY = scene.getHeight()-maxNegY-r.getHeight();
+						} else if (tgt instanceof Circle) {
+							Circle c = (Circle) tgt;
+							maxNegX = -c.getCenterX()+c.getRadius();
+							maxNegY = -c.getCenterY()+c.getRadius();
+							maxX = scene.getWidth()-c.getCenterX()-c.getRadius();
+							maxY = scene.getHeight()-c.getCenterY()-c.getRadius();
+						} else if (tgt instanceof Ellipse) {
+							Ellipse e = (Ellipse) tgt;
+							maxNegX = -e.getCenterX()+e.getRadiusX();
+							maxNegY = -e.getCenterY()+e.getRadiusY();
+							maxX = scene.getWidth()-e.getCenterX()-e.getRadiusX();
+							maxY = scene.getHeight()-e.getCenterY()-e.getRadiusY();
+						}
+						
+						double mausAbstandX = mouseX-objX;
+						double mausAbstandY = mouseY-objY;
+						double x = event.getSceneX()-mausAbstandX;
+						double y = event.getSceneY()-mausAbstandY;
+						
+						x = x < maxNegX ? maxNegX : x;
+						y = y < maxNegY ? maxNegY : y;
+						x = x > maxX ? maxX : x;
+						y = y > maxY ? maxY : y;
+						
 						tgt.setTranslateX(x);
 						tgt.setTranslateY(y);
+						System.out.println(tgt.getTranslateX() + " - " + tgt.getTranslateY());
 					}
 				}
 			}
