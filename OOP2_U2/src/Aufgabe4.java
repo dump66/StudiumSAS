@@ -127,6 +127,7 @@ public class Aufgabe4 extends Application {
 				if (event.getTarget() instanceof ToggleButton) {
 					ToggleButton button = (ToggleButton) event.getTarget();
 					if (button.isSelected()) {
+						button.setText("Einzel");
 						for(Node n : group.getChildren()){
 							if (n instanceof Shape){
 								Shape s = (Shape) n;
@@ -140,6 +141,7 @@ public class Aufgabe4 extends Application {
 						group.removeEventHandler(MouseEvent.MOUSE_PRESSED, myGroupMouseHandler);
 						group.removeEventHandler(MouseEvent.MOUSE_DRAGGED, myGroupMouseHandler);
 					} else {
+						button.setText("Gruppe");
 						for(Node n : group.getChildren()){
 							if (n instanceof Shape){
 								Shape s = (Shape) n;
