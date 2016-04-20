@@ -111,7 +111,6 @@ public class Aufgabe2u3 extends Application {
 
 						tgt.setTranslateX(x);
 						tgt.setTranslateY(y);
-						System.out.println(tgt.getTranslateX() + " - " + tgt.getTranslateY());
 					}
 				}
 			}
