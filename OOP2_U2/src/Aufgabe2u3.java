@@ -54,11 +54,11 @@ public class Aufgabe2u3 extends Application {
 
 		EventHandler<ScrollEvent> myScrollHandler = new EventHandler<ScrollEvent>() {
 			public void handle(ScrollEvent event) {
-				if (event.getSource() instanceof Rectangle) {
+				if (event.getTarget() instanceof Rectangle) {
 					rt.setFill(getRandomColor());
-				} else if (event.getSource() instanceof Circle) {
+				} else if (event.getTarget() instanceof Circle) {
 					circle.setFill(getRandomColor());
-				} else if (event.getSource() instanceof Ellipse) {
+				} else if (event.getTarget() instanceof Ellipse) {
 					el.setFill(getRandomColor());
 				}
 			}
