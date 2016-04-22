@@ -1,4 +1,8 @@
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -54,7 +58,12 @@ public class Aufgabe4 extends Application {
 			public void handle(ScrollEvent event) {
 				if (event.getTarget() instanceof Shape) {
 					Shape s = (Shape) event.getTarget();
-					s.setFill(getRandomColor());
+					try {
+						s.setFill(getRandomColor());
+					} catch (ClassNotFoundException | IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		};
@@ -95,7 +104,12 @@ public class Aufgabe4 extends Application {
 			public void handle(ScrollEvent event) {
 				for (Node n : group.getChildren()) {
 					if (n instanceof Shape) {
-						((Shape) n).setFill(getRandomColor());
+						try {
+							((Shape) n).setFill(getRandomColor());
+						} catch (ClassNotFoundException | IllegalAccessException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -103,6 +117,9 @@ public class Aufgabe4 extends Application {
 
 		EventHandler<MouseEvent> myGroupMouseHandler = new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
+				if (event.getSource() == group){
+					System.out.println("bla");
+				}
 				if (event.getButton() == MouseButton.PRIMARY) {
 					if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
 						objX = group.getTranslateX();
@@ -173,15 +190,28 @@ public class Aufgabe4 extends Application {
 		primStage.show();
 	}
 
-	private Color getRandomColor() {
-		Color[] paintList = new Color[5];
-		paintList[0] = Color.AQUA;
-		paintList[1] = Color.BLUEVIOLET;
-		paintList[2] = Color.DEEPPINK;
-		paintList[3] = Color.DIMGREY;
-		paintList[4] = Color.BROWN;
-		int i = (int) Math.floor(Math.random() * 5);
-		return paintList[i];
+	private Color getRandomColor() throws ClassNotFoundException, IllegalAccessException {
+		List<Color> paintList = allColors();
+		int length = paintList.size();
+		int i = (int) Math.floor(Math.random() * length);
+		return paintList.get(i);
+	}
+	
+	private List<Color> allColors() throws ClassNotFoundException, IllegalAccessException {
+	    List<Color> colors = new ArrayList<>();
+	    Class clazz = Class.forName("javafx.scene.paint.Color");
+	    if (clazz != null) {
+	        Field[] field = clazz.getFields();
+	        for (int i = 0; i < field.length; i++) {
+	            Field f = field[i];                
+	            Object obj = f.get(null);
+	            if(obj instanceof Color){
+	                colors.add((Color) obj);
+	            }
+
+	        }
+	    }
+	    return colors;
 	}
 
 	public static void main(String[] args) {
