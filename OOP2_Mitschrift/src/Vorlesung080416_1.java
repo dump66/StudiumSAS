@@ -43,6 +43,6 @@ public class Vorlesung080416_1 extends Application {
 	}
 
 	public static void main(String[] args) {
-		Vorlesung010416.launch(args);
+		Vorlesung010416_1.launch(args);
 	}
 }

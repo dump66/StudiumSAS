@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class Vorlesung150416 extends Application{
+public class Vorlesung150416_1 extends Application{
 	
 	public void start(Stage primStage){
 		BorderPane root = new BorderPane();
