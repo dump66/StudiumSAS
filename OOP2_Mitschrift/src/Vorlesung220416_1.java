@@ -37,7 +37,7 @@ public class Vorlesung220416_1 extends Application {
 				line.setEndY(event.getSceneY());
 			}
 		});
-
+		
 		r1.setOnMouseDragEntered(new EventHandler<MouseDragEvent>() {
 
 			@Override
@@ -68,6 +68,15 @@ public class Vorlesung220416_1 extends Application {
 			public void handle(MouseDragEvent event) {
 				r2.setFill(Color.WHITE);
 			}
+		});
+		r2.setOnMouseDragReleased(new EventHandler<MouseDragEvent>() {
+
+			@Override
+			public void handle(MouseDragEvent event) {
+				line.setEndX(event.getSceneX());
+				line.setEndY(event.getSceneY());
+			}
+			
 		});
 
 		Pane root = new Pane();
