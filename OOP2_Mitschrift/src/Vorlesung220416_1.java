@@ -9,6 +9,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+//FullDrag
 public class Vorlesung220416_1 extends Application {
 
 	Rectangle r1, r2;
