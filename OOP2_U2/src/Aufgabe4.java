@@ -117,9 +117,6 @@ public class Aufgabe4 extends Application {
 
 		EventHandler<MouseEvent> myGroupMouseHandler = new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				if (event.getSource() == group){
-					System.out.println("bla");
-				}
 				if (event.getButton() == MouseButton.PRIMARY) {
 					if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
 						objX = group.getTranslateX();
@@ -175,7 +172,7 @@ public class Aufgabe4 extends Application {
 				}
 			}
 		};
-
+		
 		group.addEventHandler(ScrollEvent.SCROLL, myGroupScrollHandler);
 		group.addEventHandler(MouseEvent.MOUSE_PRESSED, myGroupMouseHandler);
 		group.addEventHandler(MouseEvent.MOUSE_DRAGGED, myGroupMouseHandler);

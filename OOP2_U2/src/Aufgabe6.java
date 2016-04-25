@@ -20,7 +20,7 @@ public class Aufgabe6 extends Application {
 	public void start(final Stage primaryStage) {
 		confirmStage = new Stage();
 		isClosable = false;
-		
+
 		Button btnClose = new Button("Close");
 		Button ok = new Button("OK");
 		Button cancel = new Button("Cancel");
@@ -54,7 +54,11 @@ public class Aufgabe6 extends Application {
 				// if (result.get() == ButtonType.OK){
 				// Platform.exit();
 				// }
-				confirmStage.show();
+				if (isClosable) {
+					Platform.exit();
+				} else {
+					confirmStage.showAndWait();
+				}
 			}
 		});
 
@@ -62,6 +66,7 @@ public class Aufgabe6 extends Application {
 
 			public void handle(ActionEvent event) {
 				isClosable = !isClosable;
+				confirmStage.close();
 			}
 		});
 
