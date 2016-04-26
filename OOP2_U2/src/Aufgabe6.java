@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 public class Aufgabe6 extends Application {
 
@@ -40,7 +41,6 @@ public class Aufgabe6 extends Application {
 		cnfPane.setLeft(ok);
 		cnfPane.setRight(cancel);
 		root.setCenter(btnClose);
-
 		primaryStage.show();
 
 		btnClose.setOnAction(new EventHandler<ActionEvent>() {
@@ -54,28 +54,33 @@ public class Aufgabe6 extends Application {
 				// if (result.get() == ButtonType.OK){
 				// Platform.exit();
 				// }
-				if (isClosable) {
-					Platform.exit();
-				} else {
-					confirmStage.showAndWait();
-				}
+				confirmStage.showAndWait();
 			}
 		});
 
 		ok.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
-				isClosable = !isClosable;
-				confirmStage.close();
+				isClosable = true;
+				confirmStage.fireEvent(new WindowEvent(confirmStage, WindowEvent.WINDOW_CLOSE_REQUEST));
 			}
 		});
 
 		cancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
-				confirmStage.close();
+				confirmStage.fireEvent(new WindowEvent(confirmStage, WindowEvent.WINDOW_CLOSE_REQUEST));
 			}
 		});
+		
+		confirmStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent event){
+				if (isClosable){
+					Platform.exit();
+				}
+			}
+		});
+		
 	}
 
 	public static void main(String[] args) {
