@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class Aufgabe7 extends Application {
+public class Aufgabe7u8 extends Application {
 
 	private ImageView[] pDresses;
 	private ImageView[] eDresses;
