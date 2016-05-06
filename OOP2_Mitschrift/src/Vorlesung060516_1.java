@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Slider;
@@ -35,8 +36,24 @@ public class Vorlesung060516_1 extends Application {
 		// Bidirektional immer 1:1
 		// vert.valueProperty().bindBidirectional(hori.valueProperty());
 
-		vert.valueProperty().bind(Bindings.divide(hori.valueProperty(), Bindings.subtract(hori.maxProperty(), hori.minProperty())).multiply(Bindings.subtract(vert.maxProperty(), vert.minProperty())));
+		// mit Bindings-Api nur undirektionales Binden möglich
+		// vert.valueProperty().bind(Bindings.divide(hori.valueProperty(),
+		// Bindings.subtract(hori.maxProperty(),
+		// hori.minProperty())).multiply(Bindings.subtract(vert.maxProperty(),
+		// vert.minProperty())));
 
+		vert.valueProperty().bind(new DoubleBinding() {
+
+			{
+				super.bind(hori.valueProperty(), hori.maxProperty(), hori.minProperty(), vert.maxProperty(), vert.minProperty());
+			}
+
+			@Override
+			protected double computeValue() {
+				return hori.getValue() / (hori.getMax() - hori.getMin()) * (vert.getMax() - vert.getMin());
+			}
+		});
+		
 		BorderPane root = new BorderPane();
 
 		root.setRight(vert);
