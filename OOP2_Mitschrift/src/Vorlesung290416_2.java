@@ -4,7 +4,7 @@ import javafx.beans.Observable;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.stage.Stage;
 
-//Bean Observer
+// Properties
 public class Vorlesung290416_2 extends Application {
 
 	@Override

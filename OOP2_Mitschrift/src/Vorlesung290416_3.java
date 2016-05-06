@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-//Window Observer
+//Window Property
 public class Vorlesung290416_3 extends Application {
 
 	@Override
