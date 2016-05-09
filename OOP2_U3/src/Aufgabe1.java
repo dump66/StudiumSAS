@@ -62,8 +62,7 @@ public class Aufgabe1 extends Application {
 		for (Node shape : pane.getChildren()) {
 			if (shape instanceof Shape) {
 				// shape.addEventHandler(MouseEvent.ANY, mouseHandler);
-				ReadOnlyBooleanProperty hover = shape.hoverProperty();
-				hover.addListener(new ChangeListener<Boolean>() {
+				shape.hoverProperty().addListener(new ChangeListener<Boolean>() {
 
 					Shape s1 = (Shape) shape;
 					@Override

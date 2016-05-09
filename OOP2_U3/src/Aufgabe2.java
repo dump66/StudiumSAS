@@ -1,7 +1,12 @@
 
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -17,14 +22,51 @@ public class Aufgabe2 extends Application {
 		pane.setPrefWidth(1280);
 		pane.setPrefHeight(500);
 		
-		EventHandler<MouseEvent> mouseClickedEvent = new EventHandler<MouseEvent>() {
+		EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event){
+				if (event.getEventType() == MouseEvent.MOUSE_CLICKED){
 				((PianoButton) event.getTarget()).getTon().getClip().play();
+				} else if (event.getEventType() == MouseEvent.MOUSE_PRESSED){
+					DropShadow ds = new DropShadow(20, 5, 5, Color.BLACK);
+					((PianoButton) event.getTarget()).setEffect(ds);
+				} else if (event.getEventType() == MouseEvent.MOUSE_RELEASED){
+					((PianoButton) event.getTarget()).setEffect(null);
+				}
 			}
 		};
+		
+		EventHandler<KeyEvent> keyHandler = new EventHandler<KeyEvent>() {
 
+			@Override
+			public void handle(KeyEvent event) {
+				PianoButton button;
+				if (event.getEventType() == KeyEvent.KEY_PRESSED){
+					for (Node n : pane.getChildren()) {
+						if (n instanceof PianoButton){
+							button = (PianoButton) n;
+							if (event.getCode().equals(button.getTon().getCode())){
+								button.getTon().getClip().play();
+								DropShadow ds = new DropShadow(20, 5, 5, Color.BLACK);
+								button.setEffect(ds);
+							}
+						}
+					}
+				} else if (event.getEventType() == KeyEvent.KEY_RELEASED){
+					for (Node n : pane.getChildren()) {
+						if (n instanceof PianoButton){
+							button = (PianoButton) n;
+							if (event.getCode().equals(button.getTon().getCode())){
+								button.setEffect(null);
+							}
+						}
+					}
+				}
+				
+			}
+			
+		};
+		PianoButton pb = null;
 		for (int i = 0; i < 24; i++) {
-			PianoButton pb;
 			if (i < 14) {
 				switch (i) {
 				case 0:
@@ -75,8 +117,7 @@ public class Aufgabe2 extends Application {
 				}
 				pb.setStroke(Color.BLACK);
 				pb.setFill(Color.WHITE);
-				pane.getChildren().add(pb);
-				pb.setOnMouseClicked(mouseClickedEvent);
+
 			} else if (i >= 14) {
 				switch (i) {
 				case 14:
@@ -113,12 +154,13 @@ public class Aufgabe2 extends Application {
 					pb = new PianoButton(0, 0, 0, 0, Toene.A);
 				}
 				pb.setFill(Color.BLACK);
-				pane.getChildren().add(pb);
-				pb.setOnMouseClicked(mouseClickedEvent);
 			}
+			pane.getChildren().add(pb);
+			pb.addEventHandler(MouseEvent.ANY, mouseHandler);
 		}
 
 		scene = new Scene(pane);
+		scene.addEventHandler(KeyEvent.ANY, keyHandler);
 		prim.setScene(scene);
 		prim.show();
 	}
