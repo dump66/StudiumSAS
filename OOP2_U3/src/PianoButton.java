@@ -6,6 +6,7 @@ public class PianoButton extends Rectangle {
 	public PianoButton(double x, double y, double w, double h, Toene ton) {
 		super(x, y, w, h);
 		this.ton = ton;
+		this.setId(ton.getCode().toString());
 	}
 
 	public Toene getTon() {
