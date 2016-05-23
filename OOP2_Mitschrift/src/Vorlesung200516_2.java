@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 
 // Vielen Dank an Simon K. für den Code
+// Accordion
 public class Vorlesung200516_2 extends Application {
 
 	@Override

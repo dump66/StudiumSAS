@@ -3,6 +3,7 @@
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 // Vielen Dank an Simon K. für den Code
+// NodeID
 public class Vorlesung200516_1 extends Application {
 
 	@Override
@@ -25,8 +27,7 @@ public class Vorlesung200516_1 extends Application {
 	
 		
 		//man braucht natürlich ein feder.png im richtigen Ordner
-		ImageCursor cursor = new ImageCursor(new Image(getClass().getResource("feder.png").toExternalForm()));
-		btn.setCursor(cursor);
+		btn.setCursor(Cursor.HAND);
 		StackPane root = new StackPane(btn);
 		final Scene scene = new Scene(root,300,250);
 		

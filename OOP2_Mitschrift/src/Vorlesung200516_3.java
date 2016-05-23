@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 // Vielen Dank an Simon K. für den Code
+// Canvas
 public class Vorlesung200516_3 extends Application {
 	GraphicsContext gc;
 	
