@@ -1,5 +1,8 @@
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -11,17 +14,24 @@ import javafx.scene.text.Text;
 public class Key extends HBox {
 
 	KeyCode code;
-	
-	public Key(KeyCode code){
+	SimpleBooleanProperty keyProperty;
+
+	public Key(KeyCode code) {
 		super();
 		this.code = code;
+		this.keyProperty = new SimpleBooleanProperty(false);
 		createBox();
 	}
-	public KeyCode getCode(){
+
+	public KeyCode getCode() {
 		return this.code;
 	}
 
-	private void createBox(){
+	public SimpleBooleanProperty getKeyProperty() {
+		return this.keyProperty;
+	}
+
+	private void createBox() {
 		this.setPrefSize(50, 50);
 		this.setMinSize(50, 50);
 		this.setMaxSize(50, 50);
