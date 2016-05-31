@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 // Vielen Dank an Simon K. für den Code
 // Canvas
-public class Vorlesung200516_3 extends Application {
+public class Vorlesung160520_3 extends Application {
 	GraphicsContext gc;
 	
 	@Override

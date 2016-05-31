@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class Vorlesung080416_3 extends Application {
+public class Vorlesung160408_3 extends Application {
 
 	public void start(Stage primaryStage) {
 		try {
@@ -40,6 +40,6 @@ public class Vorlesung080416_3 extends Application {
 	}
 
 	public static void main(String[] args) {
-		Vorlesung010416_1.launch(args);
+		launch(args);
 	}
 }

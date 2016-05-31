@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 // Slider Bindings
-public class Vorlesung060516_1 extends Application {
+public class Vorlesung160506_1 extends Application {
 
 	@Override
 	public void start(Stage prim) throws Exception {

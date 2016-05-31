@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 // Vielen Dank an Simon K. für den Code
 // Accordion
-public class Vorlesung200516_2 extends Application {
+public class Vorlesung160520_2 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {

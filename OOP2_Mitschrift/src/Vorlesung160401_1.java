@@ -11,12 +11,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 // Vom 01.04.16
-public class Vorlesung010416_1 extends Application {
+public class Vorlesung160401_1 extends Application {
 
 	Button button, button2;
 	Stage stage;
 
-	public Vorlesung010416_1() {
+	public Vorlesung160401_1() {
 		System.out.println("1. Code der beim Erstellen des Objekts ausgeführt wird");
 	}
 
@@ -71,6 +71,6 @@ public class Vorlesung010416_1 extends Application {
 	}
 
 	public static void main(String[] args) {
-		Vorlesung010416_1.launch(args);
+		launch(args);
 	}
 }

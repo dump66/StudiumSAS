@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 //PlatformDrag&Drop
-public class Vorlesung220416_2 extends Application {
+public class Vorlesung160422_2 extends Application {
 	Text t1;
 	Text t2;
 

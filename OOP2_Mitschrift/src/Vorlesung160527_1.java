@@ -29,7 +29,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 // Controls
-public class Vorlesung270516_1 extends Application {
+public class Vorlesung160527_1 extends Application {
 	Text text;
 
 	@Override

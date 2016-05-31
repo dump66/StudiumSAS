@@ -10,14 +10,14 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class Vorlesung150416_2 extends Application{
+public class Vorlesung160415_2 extends Application{
 	
 	public void start(Stage primStage){
 		Pane root = new Pane();
 		
 		Circle circ = new Circle(30, 45, 10);
 		
-		MyEventHandler150416 dragHandler = new MyEventHandler150416("MouseDrag&Drop");
+		MyEventHandler160415 dragHandler = new MyEventHandler160415("MouseDrag&Drop");
 		circ.setOnMousePressed(dragHandler);
 		circ.setOnMouseDragged(dragHandler);
 		

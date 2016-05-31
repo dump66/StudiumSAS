@@ -1,4 +1,12 @@
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.NumberBinding;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -7,9 +15,15 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-//WindowEvents
-public class Vorlesung290416_1 extends Application {
+//Bindings
+public class Vorlesung160429_5 extends Application {
+	
+	SimpleStringProperty text;
 
+	
+	public void init(){
+		text = new SimpleStringProperty("ButtonText");
+	}
 	@Override
 	public void start(Stage prim) throws Exception {
 		StackPane root = new StackPane();
@@ -26,9 +40,10 @@ public class Vorlesung290416_1 extends Application {
 			}
 		});
 		
+		btn.textProperty().bind(text);
 		prim.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent event){
-				System.out.println("Do you really want to close?");
+				text.set("Dou you really wanna close?");
 				event.consume();
 			}
 		});

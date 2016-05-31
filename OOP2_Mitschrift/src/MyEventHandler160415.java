@@ -2,13 +2,13 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
-public class MyEventHandler150416 implements EventHandler<MouseEvent> {
+public class MyEventHandler160415 implements EventHandler<MouseEvent> {
 
 	String info;
 	double mouseX, mouseY; // Ausgangsposition Mouse
 	double objectX, objectY; // Ausgangsposition Objekt
 
-	public MyEventHandler150416(String info) {
+	public MyEventHandler160415(String info) {
 		this.info = info;
 	}
 
