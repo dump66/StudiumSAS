@@ -275,7 +275,9 @@ public class Browser {
 		bp.setTop(new HBox(label, field));
 		Button ok = new Button("Ok");
 		Button cancel = new Button("Cancel");
-		bp.setCenter(new HBox(ok, cancel));
+		Button current = new Button("Aktuelle Seite übernehmen");
+		bp.setCenter(current);
+		bp.setBottom(new HBox(ok, cancel));
 		settings.setScene(new Scene(bp));
 		settings.show();
 		ok.setOnAction(new EventHandler<ActionEvent>() {
@@ -291,6 +293,13 @@ public class Browser {
 			@Override
 			public void handle(ActionEvent event) {
 				settings.close();
+			}
+		});
+		current.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				field.setText(wv.getEngine().getLocation());
 			}
 		});
 	}
