@@ -108,6 +108,7 @@ public class Aufgabe5 extends Application {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				Tooltip tp = new Tooltip("Eine PLZ hat nur 5 Ziffern!");
+				tp.setAutoHide(true);
 				if (newValue.length() > 5) {
 					tp.show(primaryStage);
 					zip.setText(oldValue);
