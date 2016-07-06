@@ -1,0 +1,9 @@
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox fx:controller="fxml.MyController" xmlns:fx="http://javafx.com/fxml">
+<Label fx:id="label">
+<text>Hallo FXML-Welt!</text>
+</Label>
+</VBox>
