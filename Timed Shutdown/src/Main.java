@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,6 +19,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 
 public class Main extends Application {
@@ -26,6 +28,8 @@ public class Main extends Application {
 	private static Label hours;
 	private static Label mins;
 	private static Label sec;
+	private Image greenImg;
+	private Image redImg;
 	
 	private double xOffset = 0;
 	private double yOffset = 0;
@@ -33,6 +37,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Timed Shutdown");
+		greenImg = new Image("green.png");
+		redImg = new Image ("red.png");
+		primaryStage.getIcons().add(new Image("red.png"));
 		VBox mainLayout = new VBox(20);
 		mainLayout.setBackground(Background.EMPTY);
 		mainLayout.setAlignment(Pos.CENTER);
@@ -63,10 +70,10 @@ public class Main extends Application {
 			}
 		});
 
-		ImageView imStop = new ImageView("red.png");
+		ImageView imStop = new ImageView(redImg);
 		imStop.setFitHeight(50);
 		imStop.setFitWidth(50);
-		ImageView imStart = new ImageView("green.png");
+		ImageView imStart = new ImageView(greenImg);
 		imStart.setFitHeight(50);
 		imStart.setFitWidth(50);
 		Button startButton = new Button();
@@ -90,6 +97,7 @@ public class Main extends Application {
 				// Ausschalten
 				if (oldValue && !newValue) {
 					startButton.setGraphic(imStop);
+					primaryStage.getIcons().set(0, redImg);
 					task.cancel();
 					setHours("");
 					setMinutes("");
@@ -98,6 +106,7 @@ public class Main extends Application {
 				// Einschalten
 				else if (!oldValue && newValue) {
 					startButton.setGraphic(imStart);
+					primaryStage.getIcons().set(0, greenImg);
 					task.setSecondsToShutdown(spinner.getValue() * 60);
 					task.reset();
 					task.start();
