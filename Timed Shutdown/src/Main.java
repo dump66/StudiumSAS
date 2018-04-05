@@ -1,3 +1,6 @@
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -19,42 +22,35 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 public class Main extends Application {
 
 	private SimpleBooleanProperty isStarted = new SimpleBooleanProperty(false);
+	private SimpleBooleanProperty isPaused = new SimpleBooleanProperty(false);
 	private static Label hours;
 	private static Label mins;
 	private static Label sec;
 	private Image greenImg;
 	private Image redImg;
-	
+	private Image pauseImg;
+	Timeline timeline;
+	HBox timeLeft;
+
 	private double xOffset = 0;
 	private double yOffset = 0;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Timed Shutdown");
-		greenImg = new Image("green.png");
-		redImg = new Image ("red.png");
+		greenImg = new Image("green_trans.png");
+		redImg = new Image("red_trans.png");
+		pauseImg = new Image("pause.png");
 		primaryStage.getIcons().add(new Image("red.png"));
 		VBox mainLayout = new VBox(20);
 		mainLayout.setBackground(Background.EMPTY);
 		mainLayout.setAlignment(Pos.CENTER);
-		// ImageView ivUp = new ImageView("arrup.jpg");
-		// ivUp.setFitHeight(50);
-		// ivUp.setFitWidth(50);
-		// ImageView ivDown = new ImageView("arrdown.png");
-		// ivDown.setFitHeight(50);
-		// ivDown.setFitWidth(50);
-		// Button bUp = new Button();
-		// bUp.setGraphic(ivUp);
-		// bUp.setBackground(Background.EMPTY);
-		// Button bDown = new Button();
-		// bDown.setGraphic(ivDown);
-		// bDown.setBackground(Background.EMPTY);
 
 		Spinner<Integer> spinner = new Spinner<>();
 		spinner.setEditable(true);
@@ -66,7 +62,9 @@ public class Main extends Application {
 
 			@Override
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-				isStarted.set(false);
+				if (!isPaused.get()) {
+					isStarted.set(false);
+				}
 			}
 		});
 
@@ -76,17 +74,45 @@ public class Main extends Application {
 		ImageView imStart = new ImageView(greenImg);
 		imStart.setFitHeight(50);
 		imStart.setFitWidth(50);
+		ImageView imPause = new ImageView(pauseImg);
+		imPause.setFitHeight(50);
+		imPause.setFitWidth(50);
 		Button startButton = new Button();
 		startButton.setGraphic(imStop);
 		startButton.setBackground(Background.EMPTY);
-		
+
 		MyTask task = new MyTask();
-		
+
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				isStarted.set(!isStarted.get());
+				if (!isPaused.get()) {
+					isStarted.set(!isStarted.get());
+				}
+			}
+		});
+
+		isPaused.addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				// Fortsetzen
+				if (oldValue && !newValue) {
+					startButton.setGraphic(imStart);
+					primaryStage.getIcons().set(0, greenImg);
+					task.reset();
+					task.start();
+//					timeline.stop();
+//					timeLeft.setVisible(true);
+				}
+				// Pausieren
+				else if (!oldValue && newValue) {
+					startButton.setGraphic(imPause);
+					primaryStage.getIcons().set(0, pauseImg);
+					task.cancel();
+//					timeline.play();
+				}
 			}
 		});
 
@@ -115,7 +141,7 @@ public class Main extends Application {
 			}
 		});
 
-		HBox timeLeft = new HBox(10);
+		timeLeft = new HBox(10);
 		VBox hoursLeft = new VBox();
 		VBox minutesLeft = new VBox();
 		VBox secondsLeft = new VBox();
@@ -130,11 +156,15 @@ public class Main extends Application {
 		secondsLeft.getChildren().addAll(lSec, sec);
 		timeLeft.getChildren().addAll(hoursLeft, minutesLeft, secondsLeft);
 
+		timeline = new Timeline(new KeyFrame(Duration.seconds(0.4), evt -> timeLeft.setVisible(false)),
+				new KeyFrame(Duration.seconds(0.8), evt -> timeLeft.setVisible(true)));
+		timeline.setCycleCount(Animation.INDEFINITE);
+
 		mainLayout.getChildren().addAll(spinner, startButton, timeLeft);
 		Scene scene = new Scene(mainLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
+
 		scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
 
 			@Override
@@ -146,28 +176,35 @@ public class Main extends Application {
 					spinner.decrement();
 				}
 				if (event.getCode() == KeyCode.ENTER) {
-					isStarted.set(!isStarted.get());
+					if (!isPaused.get()) {
+						isStarted.set(!isStarted.get());
+					}
+				}
+				if (event.getCode() == KeyCode.TAB) {
+					if (isStarted.get()) {
+						isPaused.set(!isPaused.get());
+					}
 				}
 			}
 		});
-		
+
 		scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = primaryStage.getX() - event.getScreenX();
-                yOffset = primaryStage.getY() - event.getScreenY();
-            }
-        });
+			@Override
+			public void handle(MouseEvent event) {
+				xOffset = primaryStage.getX() - event.getScreenX();
+				yOffset = primaryStage.getY() - event.getScreenY();
+			}
+		});
 		scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setX(event.getScreenX() + xOffset);
-                primaryStage.setY(event.getScreenY() + yOffset);
-            }
-        });
-		
+			@Override
+			public void handle(MouseEvent event) {
+				primaryStage.setX(event.getScreenX() + xOffset);
+				primaryStage.setY(event.getScreenY() + yOffset);
+			}
+		});
+
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			
+
 			@Override
 			public void handle(WindowEvent event) {
 				System.out.println("Closing...");
@@ -179,17 +216,17 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 	public static void setHours(String text) {
 		hours.setText(text);
 	}
-	
+
 	public static void setMinutes(String text) {
 		mins.setText(text);
 	}
-	
+
 	public static void setSeconds(String text) {
 		sec.setText(text);
 	}
-	
+
 }
